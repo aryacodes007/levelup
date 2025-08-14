@@ -1,0 +1,28 @@
+name: levelup
+description: "A smooth, animated gamified Habit Tracker built with Flutter. Features streaks, badges, confetti, Hive persistence, Riverpod state, go_router navigation, and responsive UI via flutter_screenutil."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  common:
+    path: ../packages/common
+  translations:
+    path: ../packages/translations
+
+  flutter_riverpod: ^2.6.1
+  go_router: ^16.1.0
+  flutter_screenutil: ^5.9.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
