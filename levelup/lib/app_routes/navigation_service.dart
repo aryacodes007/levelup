@@ -36,7 +36,7 @@ final _routerProvider = Provider((ref) {
 
   return GoRouter(
     initialLocation: redirection ??
-        AppRoutes.splash, // Set initial location from redirection or '/'
+        AppRoutes.splashScreen, // Set initial location from redirection or '/'
     navigatorKey: rootNavigatorKey, // Set the navigator key to rootNavigatorKey
     refreshListenable:
         redirectionService, // Refresh the router when redirection changes

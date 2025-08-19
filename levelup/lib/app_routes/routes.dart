@@ -2,9 +2,15 @@ import 'package:levelup/levelup.dart';
 
 /// Define [routes] with corresponding [page] builders
 List<RouteBase> routes = [
-  // Splash Screen: Splash Screen
+  // Splash Screen
   GoRoute(
-    path: AppRoutes.splash,
+    path: AppRoutes.splashScreen,
     pageBuilder: SplashScreen.builder,
+  ),
+
+  // Dashboard Screen
+  GoRoute(
+    path: AppRoutes.dashboardScreen,
+    pageBuilder: DashboardScreen.builder,
   ),
 ];

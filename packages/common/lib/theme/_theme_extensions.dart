@@ -7,6 +7,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color accent1; // Primary (Muted teal)
   final Color accent2; // Tertiary (Warm pink)
   final Color button; // Secondary (Muted lavender)
+  final Color error; // Error Red
 
   const AppColors({
     required this.background,
@@ -14,6 +15,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.accent1,
     required this.accent2,
     required this.button,
+    required this.error,
   });
 
   @override
@@ -25,9 +27,9 @@ class AppColors extends ThemeExtension<AppColors> {
 
   @override
   ThemeExtension<AppColors> lerp(
-      ThemeExtension<AppColors>? other,
-      double t,
-      ) {
+    ThemeExtension<AppColors>? other,
+    double t,
+  ) {
     // We don't use colors lerp for the moment
     // Colors are not well defined enough to maintain this
     if (other == null) return this;
@@ -43,6 +45,7 @@ const AppColors appColorsExtensionLight = AppColors(
   accent1: Color(0xFF007B83), // Muted teal
   accent2: Color(0xFFFF6F84), // Warm pink
   button: Color(0xFF8E6FC1), // Muted lavender
+  error: Color(0xFFF71829), // Error red
 );
 
 /// Default Dark Theme colors for LevelUp.
@@ -52,6 +55,7 @@ const AppColors appColorsExtensionDark = AppColors(
   accent1: Color(0xFFA8DADC), // Light cyan
   accent2: Color(0xFFFFC1CC), // Soft pink
   button: Color(0xFFB39CD0), // Lavender
+  error: Color(0xFFF71829), // Error red
 );
 
 /// Extensions for AppColors on ThemeData.

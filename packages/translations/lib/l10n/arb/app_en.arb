@@ -1,4 +1,17 @@
 {
   "levelup": "LevelUp",
-  "levelUpYourHabits": "Level up your habits\nMake every day a win!"
+  "levelUpYourHabits": "Level up your habits\nMake every day a win!",
+
+  "streak": "Streak: ",
+  "addNewHabit": "Add New Habit",
+  "habitName": "Habit Name",
+  "hintHabitName": "e.g., Drink Water",
+  "emptyHabitName": "Please enter habit name",
+  "pickColor": "Pick a Color",
+  "pickEmoji": "Pick an Emoji",
+  "preview": "Preview",
+  "saveHabit": "Save Habit",
+  "noHabitsYet": "No habits yet. Tap + to add one.",
+  "sayGoodbyeTo": "Say Goodbye to This Habit?",
+  "deletingWillErase": "Deleting will erase your streak history and progress?"
 }

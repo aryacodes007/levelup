@@ -10,7 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   flutter_screenutil: ^5.9.3
+  flutter_animate: ^4.5.2
+  emoji_picker_flutter: ^4.3.0
 
 dev_dependencies:
   flutter_test:

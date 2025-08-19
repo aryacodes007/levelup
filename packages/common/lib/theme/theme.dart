@@ -66,8 +66,25 @@ ThemeData buildTheme(ColorScheme colorScheme, ThemeExtension<dynamic> colors) {
           vertical: 12.sp,
         ),
         enableFeedback: false,
+        visualDensity: VisualDensity(
+          vertical: VisualDensity.minimumDensity,
+          horizontal: VisualDensity.minimumDensity,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.w),
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
+        padding: EdgeInsets.symmetric(
+          vertical: 12.sp,
+        ),
+        enableFeedback: false,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.w),
         ),
       ),
     ),

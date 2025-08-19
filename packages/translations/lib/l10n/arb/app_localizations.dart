@@ -105,6 +105,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Level up your habits\nMake every day a win!'**
   String get levelUpYourHabits;
+
+  /// No description provided for @streak.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak: '**
+  String get streak;
+
+  /// No description provided for @addNewHabit.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Habit'**
+  String get addNewHabit;
+
+  /// No description provided for @habitName.
+  ///
+  /// In en, this message translates to:
+  /// **'Habit Name'**
+  String get habitName;
+
+  /// No description provided for @hintHabitName.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Drink Water'**
+  String get hintHabitName;
+
+  /// No description provided for @emptyHabitName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter habit name'**
+  String get emptyHabitName;
+
+  /// No description provided for @pickColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a Color'**
+  String get pickColor;
+
+  /// No description provided for @pickEmoji.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick an Emoji'**
+  String get pickEmoji;
+
+  /// No description provided for @preview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get preview;
+
+  /// No description provided for @saveHabit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Habit'**
+  String get saveHabit;
+
+  /// No description provided for @noHabitsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No habits yet. Tap + to add one.'**
+  String get noHabitsYet;
+
+  /// No description provided for @sayGoodbyeTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Say Goodbye to This Habit?'**
+  String get sayGoodbyeTo;
+
+  /// No description provided for @deletingWillErase.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting will erase your streak history and progress?'**
+  String get deletingWillErase;
 }
 
 class _AppLocalizationsDelegate
