@@ -44,7 +44,7 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
     state = repo.loadAll();
   }
 
-  /// Add new habit with optional emoji
+  /// Add new habit or update habit
   Future<void> addUpdateHabit({
     String? id,
     required String title,
@@ -80,13 +80,6 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
     }
   }
 
-  /// Update existing habit
-  Future<void> updateHabit(
-    String id, {
-    String? newTitle,
-    int? newColorValue,
-    String? newEmoji,
-  }) async {}
 
   /// Toggle done status for today
   Future<void> toggleDone(String habitId) async {
@@ -122,5 +115,11 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
   Future<void> deleteHabit(String id) async {
     await Boxes.habits().delete(id);
     state = state.where((e) => e.id != id).toList();
+  }
+
+  /// Reset All Habits
+  Future<void> respawnHabits() async {
+    await Boxes.habits().clear();
+    state = [];
   }
 }

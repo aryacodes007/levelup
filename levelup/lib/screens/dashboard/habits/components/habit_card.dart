@@ -77,6 +77,12 @@ class HabitCard extends ConsumerWidget {
               return false;
             },
             child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.w),
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+              ),
               leading: EmojiView(
                 size: 40,
                 emojiSize: 16,
@@ -135,10 +141,7 @@ class HabitCard extends ConsumerWidget {
                       return null;
                     },
                   ),
-                  onChanged: (_) {
-                    onToggle();
-                    if (!doneToday) confetti.play();
-                  },
+                  onChanged: (_) => _onHabit(confetti),
                 ),
               ),
             ),
@@ -164,6 +167,11 @@ class HabitCard extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  void _onHabit(ConfettiController confetti) {
+    onToggle();
+    if (!doneToday) confetti.play();
   }
 
   Container _dismissibleBackground({

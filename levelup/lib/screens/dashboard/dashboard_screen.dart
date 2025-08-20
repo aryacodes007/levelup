@@ -2,6 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:levelup/levelup.dart';
 
+/// [DashboardScreen]
+/// The main container screen of the app with bottom navigation.
+///
+/// Features:
+/// - Hosts the primary app sections: **Habits**, **Level Up**, and **Settings**
+/// - Provides a persistent bottom navigation bar
+/// - Keeps state between tabs using [IndexedStack]
+///
+/// Navigation:
+/// - Registered with GoRouter using [AppPageTransition]
+///
+/// State Management:
+/// - Uses a local Riverpod [StateProvider<int>] for tracking the active tab
+///
+/// UI Components:
+/// - [BottomNavigationBar] for navigation
+/// - [HabitsScreen], [LevelUpScreen], and [SettingScreen] as tab contents
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -19,12 +36,21 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
+/// State class for [DashboardScreen].
+///
+/// Handles:
+/// - Watching and updating the selected tab index
+/// - Rendering the bottom navigation bar with icons & labels
+/// - Switching between screens using [IndexedStack] to preserve state
 class _DashboardScreenState extends State<DashboardScreen> {
-  final _bottomNavProvider = StateProvider<int>((ref) => 0);
+  final _bottomNavProvider = StateProvider<int>(
+    (ref) => 0,
+  );
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).appColors;
+    final appLocal = context.l10n;
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -38,18 +64,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: (index) =>
                 ref.read(_bottomNavProvider.notifier).state = index,
             elevation: 0.01,
-            items: const [
+            items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Habits',
+                label: appLocal.habits,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.leaderboard),
-                label: 'Level Up',
+                label: appLocal.levelUp,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: 'Settings',
+                label: appLocal.settings,
               ),
             ],
           );
@@ -58,6 +84,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: Consumer(
         builder: (context, ref, child) {
           final index = ref.watch(_bottomNavProvider);
+
           return IndexedStack(
             index: index,
             children: const [

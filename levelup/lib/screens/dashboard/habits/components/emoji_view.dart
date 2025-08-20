@@ -13,7 +13,6 @@ import 'package:levelup/levelup.dart';
 /// - [size] controls the container size; [emojiSize] controls the emoji font size.
 /// - If [color] is null but [emoji] is not empty, a border is shown instead of a background.
 /// - When no emoji is provided, an [InkWell] placeholder is shown for interaction.
-
 class EmojiView extends StatelessWidget {
   final String emoji;
   final Color? color;

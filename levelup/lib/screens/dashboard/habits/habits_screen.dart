@@ -4,16 +4,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:levelup/levelup.dart';
 import 'package:intl/intl.dart';
 
-class HabitsScreen extends ConsumerStatefulWidget {
+/// Main screen that displays the list of user habits.
+///
+/// Features:
+/// - Shows a list of [HabitCard]s with streak count, completion state, and emoji/color.
+/// - Allows toggling habit completion for today.
+/// - Provides editing and deletion of habits with confirmation dialogs.
+/// - Animated entry of each habit card for smooth UX.
+/// - Displays an empty state message when no habits exist.
+/// - Floating Action Button (FAB) to add a new habit.
+///
+/// State Management:
+/// - Consumes [habitsProvider] (Riverpod) for live habit list updates.
+/// - Uses [habitRepositoryProvider] to calculate streaks.
+///
+/// Navigation & Dialogs:
+/// - [_openHabitPopup] opens the [AddHabitScreen] in an animated dialog.
+/// - [_deleteHabit] confirms deletion with a dialog and shows a success animation.
+class HabitsScreen extends ConsumerWidget {
   const HabitsScreen({super.key});
 
   @override
-  ConsumerState<HabitsScreen> createState() => _HabitsScreenState();
-}
-
-class _HabitsScreenState extends ConsumerState<HabitsScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final habits = ref.watch(habitsProvider);
 
     return Scaffold(
@@ -29,13 +41,13 @@ class _HabitsScreenState extends ConsumerState<HabitsScreen> {
       body: SafeArea(
         child: habits.isEmpty
             ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'No habits yet. Tap + to add one.',
-                    ),
-                  ],
+                child: Text(
+                  textAlign: TextAlign.center,
+                  context.l10n.noHabitsYet,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               )
             : ListView.builder(
@@ -55,6 +67,7 @@ class _HabitsScreenState extends ConsumerState<HabitsScreen> {
                             DateTime.now(),
                           )] ??
                           false;
+
                   final streak =
                       ref.read(habitRepositoryProvider).computeCurrentStreak(h);
 
@@ -89,6 +102,7 @@ class _HabitsScreenState extends ConsumerState<HabitsScreen> {
                       ),
                       onDelete: () => _deleteHabit(
                         context: context,
+                        ref: ref,
                         h: h,
                       ),
                     ),
@@ -101,6 +115,7 @@ class _HabitsScreenState extends ConsumerState<HabitsScreen> {
 
   Future<void> _deleteHabit({
     required BuildContext context,
+    required WidgetRef ref,
     required Habit h,
   }) async {
     final appLocal = context.l10n;
@@ -109,12 +124,20 @@ class _HabitsScreenState extends ConsumerState<HabitsScreen> {
       context: context,
       title: appLocal.sayGoodbyeTo,
       message: appLocal.deletingWillErase,
+      deleteText: appLocal.delete,
+      cancelText: appLocal.cancel,
       onDelete: () => context.pop(true),
       onCancel: () => context.pop(),
     );
 
     if (isDeleted == true) {
       ref.read(habitsProvider.notifier).deleteHabit(h.id);
+      DialogUtils.showDeleteSuccessDialog(
+        context: context,
+        asset: 'assets/lottie/success.json',
+        message: appLocal.deletedHabitSuccess,
+        onLoaded: context.pop,
+      );
     }
   }
 

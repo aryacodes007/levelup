@@ -4,6 +4,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:levelup/levelup.dart';
 
+/// [SplashScreen]
+/// The introductory screen shown when the app launches.
+///
+/// Features:
+/// - Displays an animated **bubble background** themed with water colors
+/// - Shows the app **title** and a **typewriter subtitle effect**
+/// - Initializes default settings (e.g., streak emoji) if not already set
+/// - Navigates automatically to [DashboardScreen] after a short delay
+///
+/// Navigation:
+/// - Registered with GoRouter using [AppPageTransition]
+///
+/// State Management:
+/// - Reads/writes from Hive for settings initialization
+/// - Updates the global [streakEmojiProvider]
+///
+/// UI Components:
+/// - [BubbleBackground] with continuous animation
+/// - [TypewriterText] for subtitle animation
+/// - Centered title + subtitle with responsive sizing
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
@@ -21,9 +41,15 @@ class SplashScreen extends ConsumerStatefulWidget {
   ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
+/// State class for [SplashScreen].
+///
+/// Handles:
+/// - Initializing Hive-stored settings (e.g., streak emoji)
+/// - Triggering a timed navigation to [DashboardScreen]
+/// - Building the animated splash UI with background + text
 class _SplashScreenState extends ConsumerState<SplashScreen> {
   // Drinking/Water color palette
-  final waterColors = const [
+  final _waterColors = const [
     Color(0xFFB2EBF2), // light aqua
     Color(0xFF80DEEA), // medium aqua
     Color(0xFF4DD0E1), // deep aqua
@@ -57,14 +83,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       streakEmoji = AppConst.defaultStreakEmoji;
     }
 
-    String? themeModeName =
-        Hive.box(AppConst.settings).get(AppConst.themeModeName) as String?;
-
-    themeModeName = themeModeName ?? ThemeMode.system.name;
-
-    final themeMode = ThemeMode.values.byName(themeModeName);
-
-    ref.read(themeModeProvider.notifier).state = themeMode;
     ref.read(streakEmojiProvider.notifier).state = streakEmoji;
   }
 
@@ -83,7 +101,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           // Animated bubbles background
           BubbleBackground(
             isDark: isDark,
-            bubbleColors: waterColors,
+            bubbleColors: _waterColors,
             bubbleCount: 40, // Increased bubble count
           ),
 

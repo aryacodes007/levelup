@@ -4,6 +4,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:levelup/levelup.dart';
 
+/// [AddHabitScreen]
+/// A screen (bottom sheet / dialog style) for creating or editing a [Habit].
+///
+/// Features:
+/// - Allows users to enter a habit name (with validation).
+/// - Lets users pick a color using a color picker dialog.
+/// - Lets users pick an emoji using a custom emoji keyboard.
+/// - Provides a preview of the habit with the chosen color and emoji.
+/// - Supports both **add** (new habit) and **edit** (existing habit) flows.
+///
+/// State Management:
+/// - Uses Riverpod [StateProvider] for managing temporary color and emoji state.
+/// - Interacts with [habitsProvider] to persist changes.
+/// - Pre-fills data when editing an existing habit.
+///
+/// UI Components:
+/// - [LabeledWidget] for labeled input fields.
+/// - [PrimaryTextFormField] for habit name input.
+/// - [EmojiView] for emoji/color display and preview.
+/// - Elevated save button to persist habit changes.
 class AddHabitScreen extends ConsumerStatefulWidget {
   final Habit? editHabit;
 
@@ -16,6 +36,13 @@ class AddHabitScreen extends ConsumerStatefulWidget {
   ConsumerState<AddHabitScreen> createState() => _AddHabitScreenState();
 }
 
+/// State class for [AddHabitScreen].
+///
+/// Handles:
+/// - Initializing form values for add/edit flows.
+/// - Managing local state providers for color and emoji.
+/// - Picking emoji and colors.
+/// - Saving the habit to the repository via [habitsProvider].
 class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
   final _nameController = TextEditingController();
   final _colorValueStateProvider = StateProvider<int>(
