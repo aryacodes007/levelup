@@ -106,6 +106,24 @@ abstract class AppLocalizations {
   /// **'Level up your habits\nMake every day a win!'**
   String get levelUpYourHabits;
 
+  /// No description provided for @habits.
+  ///
+  /// In en, this message translates to:
+  /// **'Habits'**
+  String get habits;
+
+  /// No description provided for @levelUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Level Up'**
+  String get levelUp;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
   /// No description provided for @streak.
   ///
   /// In en, this message translates to:
@@ -177,6 +195,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Deleting will erase your streak history and progress?'**
   String get deletingWillErase;
+
+  /// No description provided for @deletedHabitSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Habit deleted!\nKeep leveling up!'**
+  String get deletedHabitSuccess;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @themeModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Realm'**
+  String get themeModeTitle;
+
+  /// No description provided for @themeModeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Step into the realm that suits you.'**
+  String get themeModeSubtitle;
+
+  /// No description provided for @respawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Respawn'**
+  String get respawn;
+
+  /// No description provided for @respawnHabitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Respawn Habits'**
+  String get respawnHabitsTitle;
+
+  /// No description provided for @respawnHabitsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Embrace the reset—restart your habits and conquer again.'**
+  String get respawnHabitsSubtitle;
+
+  /// No description provided for @respawnHabitsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your entire journey will be erased. This action cannot be undone.'**
+  String get respawnHabitsMessage;
+
+  /// No description provided for @respawnHabitsSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'All habits respawned!\nReady to conquer again!'**
+  String get respawnHabitsSuccess;
+
+  /// No description provided for @changeStreakEmoji.
+  ///
+  /// In en, this message translates to:
+  /// **'Change your streak emoji'**
+  String get changeStreakEmoji;
+
+  /// No description provided for @yourStreakYourStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your streak, your style — choose the emoji you like.'**
+  String get yourStreakYourStyle;
 }
 
 class _AppLocalizationsDelegate

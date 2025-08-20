@@ -15,6 +15,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get levelUpYourHabits => 'Level up your habits\nMake every day a win!';
 
   @override
+  String get habits => 'Habits';
+
+  @override
+  String get levelUp => 'Level Up';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
   String get streak => 'Streak: ';
 
   @override
@@ -50,4 +59,44 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deletingWillErase =>
       'Deleting will erase your streak history and progress?';
+
+  @override
+  String get deletedHabitSuccess => 'Habit deleted!\nKeep leveling up!';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get themeModeTitle => 'Choose Your Realm';
+
+  @override
+  String get themeModeSubtitle => 'Step into the realm that suits you.';
+
+  @override
+  String get respawn => 'Respawn';
+
+  @override
+  String get respawnHabitsTitle => 'Respawn Habits';
+
+  @override
+  String get respawnHabitsSubtitle =>
+      'Embrace the reset—restart your habits and conquer again.';
+
+  @override
+  String get respawnHabitsMessage =>
+      'Your entire journey will be erased. This action cannot be undone.';
+
+  @override
+  String get respawnHabitsSuccess =>
+      'All habits respawned!\nReady to conquer again!';
+
+  @override
+  String get changeStreakEmoji => 'Change your streak emoji';
+
+  @override
+  String get yourStreakYourStyle =>
+      'Your streak, your style — choose the emoji you like.';
 }

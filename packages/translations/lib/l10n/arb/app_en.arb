@@ -2,6 +2,10 @@
   "levelup": "LevelUp",
   "levelUpYourHabits": "Level up your habits\nMake every day a win!",
 
+  "habits": "Habits",
+  "levelUp": "Level Up",
+  "settings": "Settings",
+
   "streak": "Streak: ",
   "addNewHabit": "Add New Habit",
   "habitName": "Habit Name",
@@ -13,5 +17,19 @@
   "saveHabit": "Save Habit",
   "noHabitsYet": "No habits yet. Tap + to add one.",
   "sayGoodbyeTo": "Say Goodbye to This Habit?",
-  "deletingWillErase": "Deleting will erase your streak history and progress?"
+  "deletingWillErase": "Deleting will erase your streak history and progress?",
+  "deletedHabitSuccess": "Habit deleted!\nKeep leveling up!",
+  "delete": "Delete",
+  "cancel": "Cancel",
+
+  "themeModeTitle": "Choose Your Realm",
+  "themeModeSubtitle": "Step into the realm that suits you.",
+  "respawn": "Respawn",
+  "respawnHabitsTitle": "Respawn Habits",
+  "respawnHabitsSubtitle": "Embrace the reset—restart your habits and conquer again.",
+  "respawnHabitsMessage": "Your entire journey will be erased. This action cannot be undone.",
+  "respawnHabitsSuccess": "All habits respawned!\nReady to conquer again!",
+
+  "changeStreakEmoji": "Change your streak emoji",
+  "yourStreakYourStyle": "Your streak, your style — choose the emoji you like."
 }

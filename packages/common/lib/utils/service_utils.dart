@@ -5,6 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// [ServiceUtils]
+///
+/// A utility class that provides common service-level helpers used across the app.
+///
+/// Features:
+/// - [keyboardClosed] → Closes the software keyboard if open.
+/// - [showEmojiKeyboard] → Displays an emoji picker bottom sheet and returns the selected emoji.
+/// - [logs] → Logs messages in debug mode (no-ops in release).
 class ServiceUtils {
   // Closes the keyboard if it's open.
   static void keyboardClosed() {

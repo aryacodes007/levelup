@@ -1,6 +1,22 @@
 part of 'theme.dart';
 
-/// This class [defines] the custom [colors] used in the LevelUp app.
+/// Application Color Extension
+///
+/// Defines the custom color palette for the LevelUp app,
+/// extending Flutter's [ThemeExtension] to support strongly typed
+/// and theme-aware custom colors.
+///
+/// Provides:
+/// - [background] → surface/background color
+/// - [primaryText] → text color on surface
+/// - [accent1] → primary accent (muted teal)
+/// - [accent2] → tertiary accent (warm pink)
+/// - [button] → secondary (muted lavender)
+/// - [error] → error red
+///
+/// Notes:
+/// - [copyWith] and [lerp] are not implemented, as the color set
+///   is fixed and does not support interpolation.
 class AppColors extends ThemeExtension<AppColors> {
   final Color background; // Background / Surface color
   final Color primaryText; // OnSurface text color

@@ -2,6 +2,16 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// [PrimaryTextFormField]
+///
+/// A custom [TextFormField] with predefined styles and utilities:
+///
+/// - Uses [InputFormattersList.trim] to prevent leading spaces.
+/// - Closes keyboard on outside taps via [ServiceUtils.keyboardClosed].
+/// - Configurable [controller], [hintText], and [validator].
+/// - Pre-styled borders with accent colors for normal and focused states.
+/// - Supports max length of 50 characters.
+/// - Automatically validates on user interaction.
 class PrimaryTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;

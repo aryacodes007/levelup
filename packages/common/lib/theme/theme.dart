@@ -4,6 +4,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 part '_colors_theme.dart';
 part '_theme_extensions.dart';
 
+/// Application Themes
+///
+/// Defines the light and dark [ThemeData] configurations for the app.
+/// Uses [Material 3] principles and extends Flutter's theming system
+/// with custom [ColorScheme] and [ThemeExtension].
+///
+/// Provides:
+/// - Light theme → [lightTheme]
+/// - Dark theme → [darkTheme]
+/// - Centralized builder → [buildTheme] for reusability
+///
+/// Customizations include:
+/// - Primary color & surface background
+/// - AppBar styling
+/// - NavigationBar icon & label behavior
+/// - Dialog, Radio, Checkbox, and Button themes
+/// - Icon color and shape definitions
 final lightTheme = buildTheme(_colorSchemeLight, appColorsExtensionLight);
 final darkTheme = buildTheme(_colorSchemeDark, appColorsExtensionDark);
 

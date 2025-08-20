@@ -1,5 +1,10 @@
 import 'package:flutter/services.dart';
 
+/// [TrimTextFormatters]
+///
+/// A custom [TextInputFormatter] that prevents leading spaces in user input.
+/// If the new value starts with a space, all spaces are removed from the text
+/// and the cursor is reset at the end of the trimmed text.
 class TrimTextFormatters extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 part '_bubble_painter.dart';
 part '_bubble.dart';
 
-/// A reusable animated bubble background widget.
-/// Can be used in splash screens or gamified backgrounds.
+/// [BubbleBackground]
+///
+/// A [StatefulWidget] that creates an animated bubble background effect.
+///
+/// - Generates a configurable number of [_Bubble] objects with random positions, sizes, speeds, and colors.
+/// - Uses an [AnimationController] to continuously animate bubble movement.
+/// - Renders the bubbles with [_BubblePainter], adapting opacity based on [isDark].
+/// - Customizable through [bubbleColors] and [bubbleCount].
+
 class BubbleBackground extends StatefulWidget {
   final bool isDark;
   final List<Color> bubbleColors;
