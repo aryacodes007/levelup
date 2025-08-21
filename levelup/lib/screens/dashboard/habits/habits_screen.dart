@@ -27,6 +27,7 @@ class HabitsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final habits = ref.watch(habitsProvider);
+    final colors = Theme.of(context).appColors;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -38,77 +39,87 @@ class HabitsScreen extends ConsumerWidget {
           size: 30.w,
         ),
       ),
-      body: SafeArea(
-        child: habits.isEmpty
-            ? Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  context.l10n.noHabitsYet,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              )
-            : ListView.builder(
-                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-                itemCount: habits.length + 1,
-                shrinkWrap: true,
-                addRepaintBoundaries: true,
-                addAutomaticKeepAlives: true,
-                itemBuilder: (context, index) {
-                  if (index == habits.length) {
-                    return SizedBox(height: 70.h);
-                  }
+      body: Stack(
+        children: [
+          // Animated Habits background
+          HabitsBackground(),
 
-                  final h = habits[index];
-                  final doneToday =
-                      h.completionByDate[DateFormat(AppConst.dateFormat).format(
+          // Habits
+          SafeArea(
+            child: habits.isEmpty
+                ? Center(
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      context.l10n.noHabitsYet,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+                    itemCount: habits.length + 1,
+                    shrinkWrap: true,
+                    addRepaintBoundaries: true,
+                    addAutomaticKeepAlives: true,
+                    itemBuilder: (context, index) {
+                      if (index == habits.length) {
+                        return SizedBox(height: 70.h);
+                      }
+
+                      final habit = habits[index];
+                      final doneToday = habit.completionByDate[
+                              DateFormat(AppConst.dateFormat).format(
                             DateTime.now(),
                           )] ??
                           false;
 
-                  final streak =
-                      ref.read(habitRepositoryProvider).computeCurrentStreak(h);
+                      final streak = ref
+                          .read(habitRepositoryProvider)
+                          .computeCurrentStreak(habit);
 
-                  return TweenAnimationBuilder(
-                    key: ValueKey(h.id),
-                    tween: Tween(begin: 0.0, end: 1.0),
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeOut,
-                    builder: (context, value, child) {
-                      return Opacity(
-                        opacity: value,
-                        child: Transform.translate(
-                          offset: Offset(0, (1 - value) * 50),
-                          child: child,
+                      return TweenAnimationBuilder(
+                        key: ValueKey(habit.id),
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeOut,
+                        builder: (context, value, child) {
+                          return Opacity(
+                            opacity: value,
+                            child: Transform.translate(
+                              offset: Offset(0, (1 - value) * 50),
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: HabitCard(
+                          habitId: habit.id,
+                          title: habit.title,
+                          emoji: habit.emoji,
+                          colorValue: habit.colorValue,
+                          currentStreak: streak,
+                          doneToday: doneToday,
+                          onToggle: () =>
+                              ref.read(habitsProvider.notifier).toggleDone(
+                                    habit.id,
+                                  ),
+                          onEdit: () => _openHabitPopup(
+                            context: context,
+                            editHabit: habit,
+                          ),
+                          onDelete: () => _deleteHabit(
+                            context: context,
+                            ref: ref,
+                            habit: habit,
+                          ),
                         ),
                       );
                     },
-                    child: HabitCard(
-                      habitId: h.id,
-                      title: h.title,
-                      emoji: h.emoji,
-                      colorValue: h.colorValue,
-                      currentStreak: streak,
-                      doneToday: doneToday,
-                      onToggle: () =>
-                          ref.read(habitsProvider.notifier).toggleDone(
-                                h.id,
-                              ),
-                      onEdit: () => _openHabitPopup(
-                        context: context,
-                        editHabit: h,
-                      ),
-                      onDelete: () => _deleteHabit(
-                        context: context,
-                        ref: ref,
-                        h: h,
-                      ),
-                    ),
-                  );
-                },
-              ),
+                  ),
+          ),
+        ],
       ),
     );
   }
@@ -116,7 +127,7 @@ class HabitsScreen extends ConsumerWidget {
   Future<void> _deleteHabit({
     required BuildContext context,
     required WidgetRef ref,
-    required Habit h,
+    required Habit habit,
   }) async {
     final appLocal = context.l10n;
 
@@ -131,7 +142,7 @@ class HabitsScreen extends ConsumerWidget {
     );
 
     if (isDeleted == true) {
-      ref.read(habitsProvider.notifier).deleteHabit(h.id);
+      ref.read(habitsProvider.notifier).deleteHabit(habit.id);
       DialogUtils.showDeleteSuccessDialog(
         context: context,
         asset: 'assets/lottie/success.json',

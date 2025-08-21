@@ -22,6 +22,15 @@
   "delete": "Delete",
   "cancel": "Cancel",
 
+  "stats": "Stats",
+  "totalDays": "TOTAL DAYS",
+  "days": "days",
+  "committedHabits": "COMMITTED HABITS",
+  "habitsTwo": "habits",
+  "currentStreak": "CURRENT STREAK",
+  "bestStreak": "BEST STREAK",
+  "bestHabits": "BEST HABITS",
+
   "themeModeTitle": "Choose Your Realm",
   "themeModeSubtitle": "Step into the realm that suits you.",
   "respawn": "Respawn",

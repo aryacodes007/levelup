@@ -26,98 +26,115 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colors = Theme.of(context).appColors;
     final appLocal = context.l10n;
 
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 8.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // Choose Your Realm
-              SettingCard(
-                title: appLocal.themeModeTitle,
-                subTitle: appLocal.themeModeSubtitle,
-                child: Consumer(
-                  builder: (context, ref, child) {
-                    final themeMode = ref.watch(themeModeProvider);
-
-                    return ThemeModeToggle(
-                      themeMode: themeMode,
-                      onChanged: (updatedThemeMode) => {
-                        Hive.box(AppConst.settings).put(
-                          AppConst.themeModeName,
-                          updatedThemeMode.name,
-                        ),
-                        ref.read(themeModeProvider.notifier).state =
-                            updatedThemeMode,
-                      },
-                    );
-                  },
-                ),
-              ),
-
-              // Respawn habits
-              SettingCard(
-                title: appLocal.respawnHabitsTitle,
-                subTitle: appLocal.respawnHabitsSubtitle,
-                child: Consumer(
-                  builder: (context, ref, child) {
-                    return SettingIconButton(
-                      icon: Icon(
-                        Icons.delete_forever,
-                        color: colorScheme.error,
-                        size: 22.w,
-                      ),
-                      splashColor: colorScheme.error,
-                      onPressed: () => _onRespawnHabits(
-                        context: context,
-                        ref: ref,
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              // Change Streak Emoji
-              SettingCard(
-                title: appLocal.changeStreakEmoji,
-                subTitle: appLocal.yourStreakYourStyle,
-                child: Consumer(
-                  builder: (context, ref, child) {
-                    final emoji = ref.watch(streakEmojiProvider);
-
-                    return SettingIconButton(
-                      onPressed: () => ServiceUtils.showEmojiKeyboard(
-                        context: context,
-                        onEmojiSelected: (emoji) => {
-                          Hive.box(AppConst.settings).put(
-                            AppConst.streakEmoji,
-                            emoji,
-                          ),
-                          ref.read(streakEmojiProvider.notifier).state = emoji,
-                        },
-                      ),
-                      splashColor: colorScheme.primary,
-                      icon: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 2.w),
-                        child: Text(
-                          emoji,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+      body: Stack(
+        children: [
+          // Animated Settings background
+          SettingsBackground(
+            key: ValueKey(colors.accent1),
+            colorPalette: [
+              colors.primaryText,
+              colors.accent1,
+              colors.accent2,
+              colors.button,
+              colors.error,
             ],
           ),
-        ),
+
+          // Settings
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: 8.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Choose Your Realm
+                  SettingCard(
+                    title: appLocal.themeModeTitle,
+                    subTitle: appLocal.themeModeSubtitle,
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final themeMode = ref.watch(themeModeProvider);
+
+                        return ThemeModeToggle(
+                          themeMode: themeMode,
+                          onChanged: (updatedThemeMode) => {
+                            Hive.box(AppConst.settings).put(
+                              AppConst.themeModeName,
+                              updatedThemeMode.name,
+                            ),
+                            ref.read(themeModeProvider.notifier).state =
+                                updatedThemeMode,
+                          },
+                        );
+                      },
+                    ),
+                  ),
+
+                  // Respawn habits
+                  SettingCard(
+                    title: appLocal.respawnHabitsTitle,
+                    subTitle: appLocal.respawnHabitsSubtitle,
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        return SettingIconButton(
+                          icon: Icon(
+                            Icons.delete_forever,
+                            color: colors.error,
+                            size: 22.w,
+                          ),
+                          splashColor: colors.error,
+                          onPressed: () => _onRespawnHabits(
+                            context: context,
+                            ref: ref,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  // Change Streak Emoji
+                  SettingCard(
+                    title: appLocal.changeStreakEmoji,
+                    subTitle: appLocal.yourStreakYourStyle,
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final emoji = ref.watch(streakEmojiProvider);
+
+                        return SettingIconButton(
+                          onPressed: () => ServiceUtils.showEmojiKeyboard(
+                            context: context,
+                            onEmojiSelected: (emoji) => {
+                              Hive.box(AppConst.settings).put(
+                                AppConst.streakEmoji,
+                                emoji,
+                              ),
+                              ref.read(streakEmojiProvider.notifier).state = emoji,
+                            },
+                          ),
+                          splashColor: colors.accent1,
+                          icon: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 2.w),
+                            child: Text(
+                              emoji,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

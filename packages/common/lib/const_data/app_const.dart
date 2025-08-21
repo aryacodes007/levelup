@@ -25,4 +25,9 @@ class AppConst {
   static const String dateFormat = 'dd-MM-yyyy';
   static const String streakEmoji = 'streakEmoji';
   static const String themeModeName = 'themeModeName';
+
+  static const String circle = 'circle';
+  static const String rrect = 'rrect';
+  static const String triangle = 'triangle';
+  static const String diamond = 'diamond';
 }

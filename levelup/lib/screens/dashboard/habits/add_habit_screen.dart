@@ -46,7 +46,7 @@ class AddHabitScreen extends ConsumerStatefulWidget {
 class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
   final _nameController = TextEditingController();
   final _colorValueStateProvider = StateProvider<int>(
-    (ref) => 0xFF388E3C,
+    (ref) => 0xFF2196F3,
   );
 
   final _emojiStateProvider = StateProvider<String>(

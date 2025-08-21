@@ -1,7 +1,10 @@
+import 'dart:collection';
+
 import 'package:levelup/levelup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 /// Riverpod provider that exposes a singleton [HabitRepository].
 ///
@@ -52,34 +55,38 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
     required String emoji,
   }) async {
     if (id != null) {
-      state = state.map((h) {
-        if (h.id == id) {
+      state = state.map((habit) {
+        if (habit.id == id) {
           final updated = Habit(
-            id: h.id,
+            id: habit.id,
             title: title,
             colorValue: colorValue,
             emoji: emoji,
-            bestStreak: h.bestStreak,
-            completionByDate: Map.from(h.completionByDate),
+            bestStreak: habit.bestStreak,
+            completionByDate: Map.from(habit.completionByDate),
           );
           Boxes.habits().put(updated.id, updated);
           return updated;
         }
-        return h;
+        return habit;
       }).toList();
     } else {
+      final date = DateFormat(AppConst.dateFormat).format(
+        DateTime.now(),
+      );
       final id = const Uuid().v4();
       final h = Habit(
         id: id,
         title: title,
         colorValue: colorValue,
         emoji: emoji,
+        completionByDate: {date: false},
+        bestStreak: 0,
       );
       await repo.addHabit(h);
       state = [...state, h];
     }
   }
-
 
   /// Toggle done status for today
   Future<void> toggleDone(String habitId) async {
@@ -90,24 +97,53 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
     ];
   }
 
-  Habit _updateHabitCompletion(Habit h, String dayKey) {
-    final map = Map<String, bool>.from(h.completionByDate);
-    final newVal = !(map[dayKey] ?? false);
-    map[dayKey] = newVal;
-    var newBest = h.bestStreak;
-    if (newVal) {
-      final streak = repo.computeCurrentStreak(h..completionByDate = map);
-      newBest = max(newBest, streak);
+  Habit _updateHabitCompletion(Habit habit, String dayKey) {
+    final dateFormat = DateFormat(AppConst.dateFormat);
+    final map = Map<String, bool>.from(habit.completionByDate);
+
+    // Toggle today's completion
+    map[dayKey] = !(map[dayKey] ?? false);
+
+    // Fill missing days between earliest and latest date
+    if (map.isNotEmpty) {
+      final dates = map.keys.map(dateFormat.parse).toList()..sort();
+      final start = dates.first;
+      final end = dates.last;
+
+      for (var d = start; !d.isAfter(end); d = d.add(const Duration(days: 1))) {
+        map.putIfAbsent(dateFormat.format(d), () => false);
+      }
     }
+
+    // Sort map by date and keep order
+    final sortedMap = SplayTreeMap<String, bool>((a, b) {
+      final da = dateFormat.parse(a);
+      final db = dateFormat.parse(b);
+      return da.compareTo(db);
+    });
+    sortedMap.addAll(map);
+
+    // Compute current streak
+    final tempHabit = habit..completionByDate = sortedMap;
+    final currentStreak =
+        sortedMap[dayKey]! ? repo.computeCurrentStreak(tempHabit) : 0;
+
+    // Update best streak
+    final newBest = max(habit.bestStreak, currentStreak);
+
+    // Create updated habit
     final updated = Habit(
-      id: h.id,
-      title: h.title,
-      colorValue: h.colorValue,
-      emoji: h.emoji,
+      id: habit.id,
+      title: habit.title,
+      colorValue: habit.colorValue,
+      emoji: habit.emoji,
       bestStreak: newBest,
-      completionByDate: map,
+      completionByDate: sortedMap,
     );
+
+    // Save updated habit
     Boxes.habits().put(updated.id, updated);
+
     return updated;
   }
 

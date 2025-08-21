@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
+
 part '_bubble_painter.dart';
 part '_bubble.dart';
 
@@ -11,7 +13,6 @@ part '_bubble.dart';
 /// - Uses an [AnimationController] to continuously animate bubble movement.
 /// - Renders the bubbles with [_BubblePainter], adapting opacity based on [isDark].
 /// - Customizable through [bubbleColors] and [bubbleCount].
-
 class BubbleBackground extends StatefulWidget {
   final bool isDark;
   final List<Color> bubbleColors;
@@ -80,3 +81,8 @@ class _BubbleBackgroundState extends State<BubbleBackground>
     );
   }
 }
+
+
+
+
+

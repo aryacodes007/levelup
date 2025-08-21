@@ -70,6 +70,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get stats => 'Stats';
+
+  @override
+  String get totalDays => 'TOTAL DAYS';
+
+  @override
+  String get days => 'days';
+
+  @override
+  String get committedHabits => 'COMMITTED HABITS';
+
+  @override
+  String get habitsTwo => 'habits';
+
+  @override
+  String get currentStreak => 'CURRENT STREAK';
+
+  @override
+  String get bestStreak => 'BEST STREAK';
+
+  @override
+  String get bestHabits => 'BEST HABITS';
+
+  @override
   String get themeModeTitle => 'Choose Your Realm';
 
   @override

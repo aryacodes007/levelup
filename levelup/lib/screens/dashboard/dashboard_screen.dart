@@ -66,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             elevation: 0.01,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.local_drink_sharp),
                 label: appLocal.habits,
               ),
               BottomNavigationBarItem(

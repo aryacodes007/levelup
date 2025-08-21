@@ -28,36 +28,41 @@ class HabitRepository {
       DateFormat(AppConst.dateFormat).format(dt ?? DateTime.now());
 
   int computeCurrentStreak(Habit h) {
-    final today = DateFormat(AppConst.dateFormat).format(DateTime.now());
+    if (h.completionByDate.isEmpty) return 0;
 
-    final sortedKeys = h.completionByDate.keys.toList()
-      ..sort((a, b) {
-        final pa = DateFormat(AppConst.dateFormat).parse(a);
-        final pb = DateFormat(AppConst.dateFormat).parse(b);
-        return pa.compareTo(pb);
-      });
+    final dateFormat = DateFormat(AppConst.dateFormat);
+
+    // Get all completed dates sorted ascending
+    final completedDates = h.completionByDate.entries
+        .where((e) => e.value)
+        .map((e) => dateFormat.parse(e.key))
+        .toList()
+      ..sort();
+
+    if (completedDates.isEmpty) return 0;
 
     int streak = 0;
+    DateTime previousDate = completedDates.last; // Start from latest
 
-    for (int i = sortedKeys.length - 1; i >= 0; i--) {
-      final date = sortedKeys[i];
-      final value = h.completionByDate[date] ?? false;
+    // If latest completed date is older than yesterday, streak starts fresh
+    if (DateTime.now().difference(previousDate).inDays > 1) {
+      streak = 0;
+      previousDate = DateTime.now();
+    } else {
+      streak = 1;
+    }
 
-      if (date == today) {
-        if (value) {
-          streak++;
-        }
-        continue;
-      }
-
-      if (value) {
+    // Count consecutive days backwards
+    for (int i = completedDates.length - 2; i >= 0; i--) {
+      final diff = previousDate.difference(completedDates[i]).inDays;
+      if (diff == 1) {
         streak++;
+        previousDate = completedDates[i];
       } else {
-        break;
+        break; // Gap → stop counting
       }
     }
 
     return streak;
   }
 }
-

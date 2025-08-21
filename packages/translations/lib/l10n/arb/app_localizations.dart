@@ -214,6 +214,54 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @stats.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats'**
+  String get stats;
+
+  /// No description provided for @totalDays.
+  ///
+  /// In en, this message translates to:
+  /// **'TOTAL DAYS'**
+  String get totalDays;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get days;
+
+  /// No description provided for @committedHabits.
+  ///
+  /// In en, this message translates to:
+  /// **'COMMITTED HABITS'**
+  String get committedHabits;
+
+  /// No description provided for @habitsTwo.
+  ///
+  /// In en, this message translates to:
+  /// **'habits'**
+  String get habitsTwo;
+
+  /// No description provided for @currentStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'CURRENT STREAK'**
+  String get currentStreak;
+
+  /// No description provided for @bestStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'BEST STREAK'**
+  String get bestStreak;
+
+  /// No description provided for @bestHabits.
+  ///
+  /// In en, this message translates to:
+  /// **'BEST HABITS'**
+  String get bestHabits;
+
   /// No description provided for @themeModeTitle.
   ///
   /// In en, this message translates to:
