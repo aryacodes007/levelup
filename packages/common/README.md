@@ -1,39 +1,60 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# common
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+The **common** package in the **LevelUp App** is a Dart package that centralizes all reusable widgets, components, constants, and utilities. It promotes modularity, consistency, and maintainability across the app while reducing duplicate development effort.
 
 ## Features
+- Reusable UI components (buttons, text fields, animated backgrounds, etc.)
+- Centralized themes and `AppColors` extension
+- Utility functions for extensions, validators, services, dialogs, and input formatting
+- Constants for app-wide usage
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Structure
+The **common** package is structured into the following folders:
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- `pubspec.yaml` : Contains all the dependencies and package configuration.
+- `lib/const_data/` : Contains application-wide constants (`app_const.dart`).
+- `lib/theme/` : Contains app theme configuration and color extensions.
+- `lib/utils/` : Contains utilities such as:
+    - `extensions/` : Extension methods
+    - `input_formatters/` : Custom input formatters
+    - `dialog_utils.dart` : Dialog helpers
+    - `service_utils.dart` : Service layer utilities
+    - `validators.dart` : Validation helpers
+- `lib/widgets/` : Reusable widgets such as animated backgrounds, primary text form field, and typewriter text.
+- `lib/common.dart` : Barrel export file for easier imports.
 
 ## Usage
+Follow the steps below to set up and use the **common** in the **Level Up** app:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+1. **Install dependencies**  
+   Run the following command in the terminal or use **Pub get** from `pubspec.yaml`:
+   ```bash
+    flutter pub get
+    ```
 
-```dart
-const like = 'sample';
-```
+2. **Add dependency in `pubspec.yaml`**  
+   Add dependency in `pubspec.yaml` of **levelup** app, add the translations package:   ```yaml
+   dependencies:
+   translation:
+   path: ../packages/translation
+   ```
 
-## Additional information
+3. **Export the package**  
+   Export the **common** package in the `level_up.dart` of level up app.
+   ```dart
+   export 'package:common/common.dart';
+   ```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+4. **Use the package**  
+   Import `level_up.dart` and use the widgets, constants, utils, and services.
+   ```dart
+   import 'package:level_up/level_up.dart';
+   
+   AppConst.appName
+   ServiceUtils.keyboardClosed()
+   DialogUtils.showDialog()
+   ```
+   
+#
+### NOTE
+> Do not forget to apply barrel export. applying barrel export will ease the process of accessibility throughout the packages.

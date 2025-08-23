@@ -1,39 +1,68 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# translations
+The **Translations** package for managing **app localization** in the **LevelUp** app.
 
 ## Features
+- Provides localization setup using Flutter's built-in l10n support.
+- Centralizes all app strings for multiple languages.
+- Simplifies translation management and integration with the app.
+- Ensures consistency across the LevelUp app.
+- Adds a convenient `context.l10n` extension for easy access to localized strings.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Structure
+The **Translations** package is structured into the following files and folders:
 
-## Getting started
+- `pubspec.yaml` : Contains all the dependencies and package configuration.
+- `l10n.yaml` : Flutter localization configuration file.
+- `lib/l10n/` : Contains localization setup and generated files.
+    - `arb/` : Contains ARB files with translations (e.g., `app_en.arb`).
+    - `app_localizations.dart` : Generated localization delegate.
+    - `app_localizations_en.dart` : Generated localization for English.
+    - `l10n.dart` : Localization extension (`context.l10n`) and helpers.
+    - `translations.dart` : Barrel export for localization usage.
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+## Generating Localization Files
+Run the following command to active command to generate localization files:
+```bash
+dart pub global activate generate
 ```
 
-## Additional information
+After making changes to the ARB files, generate the localization files using:
+```bash
+cd packages/translations
+flutter gen-l10n
+```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Usage
+Follow the steps below to set up and use the **translations** in the **Level Up** app:
+
+1. **Install dependencies**  
+   Run the following command in the terminal or use **Pub get** from `pubspec.yaml`:
+   ```bash
+    flutter pub get
+    ```
+
+2. **Add dependency in `pubspec.yaml`**  
+   Add dependency in `pubspec.yaml` of **levelup** app, add the translations package:   
+   ```yaml
+   dependencies:
+     translation:
+       path: ../packages/translation
+   ```
+   
+3. **Export the package**  
+   Export the **translations** package in the `level_up.dart` of level up app:
+   ```dart
+   export 'package:translations/translations.dart';
+   ```
+
+4. **Use the package**  
+   Import `level_up.dart` and use the localized strings:
+   ```dart
+   import 'package:level_up/level_up.dart';
+   
+   context.l10n.levelup
+   ```
+
+#
+### NOTE
+> Do not forget to apply barrel export. applying barrel export will ease the process of accessibility throughout the packages.

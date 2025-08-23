@@ -1,7 +1,5 @@
 name: common
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "The common package in the LevelUp App is a Dart package that centralizes all reusable widgets, components, constants, and utilities. It promotes modularity, consistency, and maintainability across the app while reducing duplicate development effort."
 
 environment:
   sdk: ">=3.4.3 <4.0.0"

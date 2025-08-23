@@ -1,5 +1,5 @@
 name: translations
-description: App Translations
+description: 'The Translations package for managing app localization in the LevelUp app.'
 
 publish_to: 'none'
 
